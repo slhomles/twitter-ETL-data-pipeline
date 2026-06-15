@@ -1,0 +1,10 @@
+{
+  "dataset_id": "6e7258ba4ada5d2d69ed",
+  "status": "approved",
+  "reviewed_by": "automated-test-fixture",
+  "reviewed_at": "2026-09-04T00:00:00Z",
+  "label_sample_size": 13,
+  "label_error_rate": 0.0,
+  "approved_for_training": true,
+  "notes": "Valid only for the deterministic synthetic fixture."
+}

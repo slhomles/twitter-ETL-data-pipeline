@@ -1,0 +1,41 @@
+[model]
+name = "Qwen/Qwen2.5-7B-Instruct"
+revision = "main"
+allow_mutable_revision_for_pilot = true
+trust_remote_code = false
+
+[quantization]
+load_in_4bit = true
+quant_type = "nf4"
+use_double_quant = true
+compute_dtype = "bfloat16"
+
+[lora]
+r = 32
+alpha = 64
+dropout = 0.05
+bias = "none"
+target_modules = ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+
+[training]
+max_length = 512
+num_train_epochs = 2.0
+learning_rate = 0.0001
+per_device_train_batch_size = 2
+per_device_eval_batch_size = 2
+gradient_accumulation_steps = 16
+warmup_ratio = 0.03
+weight_decay = 0.01
+max_grad_norm = 1.0
+lr_scheduler_type = "cosine"
+logging_steps = 10
+eval_steps = 100
+save_steps = 100
+save_total_limit = 2
+gradient_checkpointing = true
+packing = true
+seed = 42
+
+[tracking]
+report_to_mlflow = false
+experiment_name = "style-finetuning-pilot"

@@ -1,0 +1,25 @@
+[dataset]
+version = "0.1.0"
+allowed_languages = ["en"]
+allowed_author_ids = []
+min_text_chars = 5
+exclude_reference_types = ["retweeted"]
+replace_urls = true
+replace_mentions = true
+max_per_near_duplicate_cluster = 3
+
+[dedup]
+ngram_size = 3
+similarity_threshold = 0.72
+minhash_permutations = 64
+minhash_bands = 16
+exhaustive_limit = 500
+
+[split]
+train_ratio = 0.80
+validation_ratio = 0.10
+test_ratio = 0.10
+
+[prompt]
+system = "Write a short synthetic social post in the configured rhetorical style. Do not claim to be a real person or present the text as an authentic quote."
+time_context = "historical/general"

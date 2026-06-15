@@ -13,6 +13,29 @@ unittests.cfg
 .DS_Store
 .vscode/
 .idea/
+
+# Private/source datasets and generated artifacts
+data/raw/
+data/normalized/
+data/curated/
+data/rejected/
+artifacts/
+checkpoints/
+mlruns/
+outputs/
 *.csv
 *.parquet
-*.json
+*.jsonl
+*.safetensors
+*.bin
+*.pt
+*.pth
+*.gguf
+
+# A real rights manifest may contain confidential legal references.
+data_rights_manifest.json
+
+# Allow reviewed configs and synthetic test fixtures in Git.
+!configs/**/*.json
+!tests/fixtures/**/*.json
+!tests/fixtures/**/*.jsonl

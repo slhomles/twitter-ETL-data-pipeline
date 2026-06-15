@@ -1,0 +1,10 @@
+{
+  "dataset_id": "replace-with-dataset-id",
+  "status": "draft",
+  "reviewed_by": "",
+  "reviewed_at": "",
+  "label_sample_size": 0,
+  "label_error_rate": null,
+  "approved_for_training": false,
+  "notes": "Complete after human QA of the curated dataset."
+}

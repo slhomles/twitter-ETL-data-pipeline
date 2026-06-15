@@ -1,4 +1,87 @@
-# Twitter ETL Pipeline
+# Rights-Gated Style Fine-Tuning Pipeline
+
+This repository now contains an implementation-ready pipeline for building a short-form writing
+style model while preserving raw data, enforcing data-rights approval, measuring memorization, and
+preventing deceptive impersonation.
+
+The original Twitter ETL notebook remains as a legacy prototype. It is **not** used by the new
+training pipeline and must not be used to collect X content for ML training without appropriate
+authorization.
+
+## Implemented components
+
+- Fail-closed JSON rights manifest and separate curated-dataset quality approval.
+- CSV/JSON/JSONL ingestion with a lossless raw envelope and canonical normalized schema.
+- Retweet/link/language filters, exact deduplication, MinHash-LSH near-duplicate clustering, and
+  conversation-aware temporal splitting.
+- Private S3 publication that refuses non-empty prefixes, encrypts objects, and publishes the
+  dataset manifest last.
+- Prompt/completion JSONL output for Hugging Face TRL.
+- Qwen2.5-7B-Instruct QLoRA config and a CUDA training entrypoint with lazy optional imports.
+- Stylometry, distinct-n, exact-copy, token-span, and 5-gram overlap evaluation.
+- FastAPI service with API-key authentication, mandatory synthetic disclosure, request policy,
+  identity-output filtering, and training-overlap filtering.
+- Standard-library unit/integration tests using self-authored fictional fixtures.
+
+## Current release status
+
+The software pipeline is runnable on synthetic data. Real-corpus training is intentionally blocked
+until all of the following exist:
+
+1. `data_rights_manifest.json` is reviewed and approves `dataset_build` and `ml_training` for the
+   intended scope.
+2. The corpus is supplied outside Git and its source hashes/provenance are recorded.
+3. A quality approval matching the built `dataset_id` documents sampled label QA.
+4. The optional CUDA training dependencies are installed on a compatible GPU host.
+
+See [DATA_USE.md](docs/DATA_USE.md) and the
+[implementation runbook](docs/implementation_runbook.md) before using a real corpus.
+
+## Quick verification
+
+PowerShell:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m unittest discover -s tests -v
+python -m style_finetuning.cli rights `
+  --manifest tests/fixtures/synthetic_rights_manifest.json `
+  --use dataset_build `
+  --scope test
+```
+
+Build the deterministic synthetic dataset into a new directory:
+
+```powershell
+$env:PYTHONPATH = "src"
+python -m style_finetuning.cli build `
+  --input tests/fixtures/synthetic_posts.jsonl `
+  --output outputs/synthetic-v1 `
+  --config configs/data/default.toml `
+  --rights-manifest tests/fixtures/synthetic_rights_manifest.json `
+  --scope test
+```
+
+## Project layout
+
+```text
+configs/                 Data, training, evaluation, and approval templates
+dags/                    Airflow orchestration for dataset builds
+docs/                    Plan, data-use status, cards, and operating runbook
+src/style_finetuning/    Rights, data prep, training, evaluation, and serving code
+tests/                   Synthetic fixtures and automated tests
+notebooks/               Legacy Twitter ETL prototype
+```
+
+## Safety boundary
+
+The service generates labeled synthetic writing only. It does not auto-post, does not expose a
+switch to remove disclosure, and blocks explicit impersonation, fabricated official attribution,
+targeted political persuasion, and outputs too similar to training examples.
+
+---
+
+## Legacy Twitter ETL Pipeline
 
 A data engineering project that extracts Twitter data using the Twitter API, processes it with Apache Airflow, and stores the results in Amazon S3.
 

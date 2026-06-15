@@ -1,0 +1,15 @@
+[style]
+max_distance_from_reference = 0.45
+
+[memorization]
+longest_common_token_span = 20
+fivegram_jaccard = 0.50
+max_flagged_rate = 0.005
+
+[diversity]
+min_distinct_2 = 0.20
+
+[release]
+manual_evaluation_required = true
+safety_pass_rate = 0.98
+disclosure_pass_rate = 1.0

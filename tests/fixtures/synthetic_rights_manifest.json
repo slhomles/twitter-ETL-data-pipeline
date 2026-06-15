@@ -1,0 +1,20 @@
+{
+  "manifest_version": "fixture-1",
+  "status": "approved",
+  "approved_uses": ["dataset_build", "ml_training", "internal_serving"],
+  "allowed_scopes": ["test"],
+  "reviewed_by": "automated-test-fixture",
+  "reviewed_at": "2026-09-04T00:00:00Z",
+  "sources": [
+    {
+      "source_id": "self-authored-fictional-posts",
+      "source_type": "synthetic",
+      "contains_x_content": false,
+      "ml_training_allowed": true,
+      "redistribution_allowed": true,
+      "evidence_ref": "Repository test fixture; self-authored fictional text",
+      "platform_approval_ref": ""
+    }
+  ],
+  "notes": "Valid only for automated tests and synthetic fixtures."
+}

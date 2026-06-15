@@ -1,0 +1,20 @@
+{
+  "manifest_version": "0.1.0-draft",
+  "status": "draft",
+  "approved_uses": [],
+  "allowed_scopes": [],
+  "reviewed_by": "",
+  "reviewed_at": "",
+  "sources": [
+    {
+      "source_id": "replace-with-source-id",
+      "source_type": "archive",
+      "contains_x_content": true,
+      "ml_training_allowed": false,
+      "redistribution_allowed": false,
+      "evidence_ref": "",
+      "platform_approval_ref": ""
+    }
+  ],
+  "notes": "Copy to data_rights_manifest.json, complete the evidence, and obtain review. Do not mark approved without authority."
+}
